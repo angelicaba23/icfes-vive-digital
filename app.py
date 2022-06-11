@@ -1,9 +1,12 @@
 """ ---- DASHBOARD DS4A PROJECT ---- """
+import datetime
+import random
 import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
 import plotly.graph_objects as go
+import plotly.express as px  
 import pydeck as pdk
 
 
@@ -84,8 +87,35 @@ st.write(
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sagittis pellentesque orci, ut sagittis tortor ullamcorper in. Etiam erat est, egestas in consectetur id, pellentesque at sem. Praesent ligula magna, tincidunt at lorem sit amet, malesuada rhoncus quam. Vivamus elementum diam dui, nec mollis velit molestie ac. Ut vel maximus tortor, non finibus erat. Praesent accumsan urna vitae pharetra dignissim. Cras luctus risus eros, at lobortis odio lobortis tincidunt. Nulla eget erat porta, semper tellus eget, gravida nisl. Fusce euismod ornare tortor nec posuere. """
 )
 
+# LAYING OUT THE FILTERS ROW
+st.write("**FILTER BY:**")
+
+row1_1, row1_2, row1_3 = st.columns((1,1,2))
+
+with row1_1:
+    id = st.date_input(
+    "Desde:",
+    #datetime.date(2019, 7, 6)
+    value=None, min_value=None, max_value=None)
+    
+with row1_2:
+    fd = st.date_input(
+    "Hasta:",
+    #datetime.date(2019, 7, 6)
+    value=None, min_value=None, max_value=None)
+
+with row1_3:
+  department = st.multiselect(
+     'Department ',
+     ['Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada'],
+     #['Cesar']
+     )
+    
+
+
+
 # LAYING OUT THE DASHBOARD
-row2_1, row2_2, row2_3 = st.columns((1, 3, 3))
+row2_1, row2_2 = st.columns(2)
 
 # SETTING THE ZOOM LOCATIONS FOR THE AIRPORTS
 col_location= [4.570868,-74.297333]
@@ -93,19 +123,15 @@ zoom_level = 5
 #midpoint = mpoint(data["lat"], data["lon"])
 
 with row2_1:
-    # LAYING OUT THE FILTERS
-    st.write("**FILTER BY:**")
-    department = st.multiselect(
-     'Department ',
-     ['Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada'],
-     ['Cesar'])
-
-with row2_2:
     # LAYING OUT THE CHARTS SECTION
+
     st.write("**Correlation: Vive Digital and Desertion**")
+    dftime = px.data.gapminder().query("continent == 'Oceania'")
+    fig = px.line(dftime, x='year', y='lifeExp', color='country', symbol="country")
+    st.plotly_chart(fig, use_container_width=True)
+
     st.write("**Vive Digital by department**")
     dpts=['Amazonas','Antioquia','Arauca','Atlántico','Bolívar','Boyacá','Caldas','Caquetá','Casanare','Cauca','Cesar','Chocó','Córdoba','Cundinamarca','Guainía','Guaviare','Huila','La Guajira','Magdalena','Meta','Nariño','Norte de Santander','Putumayo','Quindío','Risaralda','San Andrés y Providencia','Santander','Sucre','Tolima','Valle del Cauca','Vaupés','Vichada']
- 
     values = ['66','15','117','2','59','86','71','40','96','133','12','70','27','128','67','65','16','7','30','82','28','89','24','92','127','119','96','23','18','65','29','114']
     fig = go.Figure(
     go.Pie(
@@ -114,10 +140,14 @@ with row2_2:
     hoverinfo = "label+percent",
     textinfo = "value"
     ))
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
+
     st.write("**Desertion history**")
+    dftime = px.data.gapminder().query("continent == 'Oceania'")
+    fig = px.line(dftime, x='year', y='lifeExp', color='country', symbol="country")
+    st.plotly_chart(fig, use_container_width=True)
     
-with row2_3:
+with row2_2:
     # LAYING OUT THE MAP SECTION
     st.write("**Vive Digital Lotations**")
     DATA_SOURCE = 'https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/fortune_500.csv'
