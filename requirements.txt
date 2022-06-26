@@ -1,6 +1,5 @@
 # Core
 streamlit==1.10.0
-
 # Streamlit components
 #streamlit-ace
 #streamlit-discourse
