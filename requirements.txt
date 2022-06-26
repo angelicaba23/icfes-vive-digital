@@ -1,2 +1,16 @@
-streamlit
+# Core
+streamlit==1.10.0
+
+# Streamlit components
+streamlit-ace
+streamlit-discourse
+streamlit-disqus
+streamlit-elements
+streamlit-pandas-profiling
+streamlit-player
+streamlit-quill
+
+# Dependencies
+pandas-profiling
+requests
 plotly
