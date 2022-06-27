@@ -1,5 +1,6 @@
 # Core
 streamlit==1.10.0
+
 # Streamlit components
 #streamlit-ace
 #streamlit-discourse
@@ -8,6 +9,7 @@ streamlit==1.10.0
 #streamlit-pandas-profiling
 #streamlit-player
 #streamlit-quill
+streamlit-elements==0.1.*
 
 # Dependencies
 pandas-profiling

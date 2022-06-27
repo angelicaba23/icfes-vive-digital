@@ -1,0 +1,25 @@
+[theme]
+# The preset Streamlit theme that your custom theme inherits from. One of "light" or "dark".
+base = "light"
+
+# Primary accent color for interactive elements.
+#primaryColor = "#1f1c51"
+
+# Background color for the main content area.
+# backgroundColor =
+
+# Background color used for the sidebar and most interactive widgets.
+#secondaryBackgroundColor = "#97fdf5" 
+
+# Color used for almost all text.
+#textColor = "#1f1c51"
+
+# Font family for all text in the app, except code blocks. One of "sans serif", "serif", or "monospace".
+# font =
+
+
+[server]
+# Max size, in megabytes, of messages that can be sent via the WebSocket connection.
+# Default: 200
+maxUploadSize = 1000
+maxMessageSize = 1000
